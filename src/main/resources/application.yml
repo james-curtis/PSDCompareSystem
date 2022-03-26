@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+
+  #开启页面表单的Rest功能
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled=true:
