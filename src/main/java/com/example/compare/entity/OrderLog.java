@@ -33,7 +33,7 @@ public class OrderLog implements Serializable {
     /**
      * 支付状态
      */
-    private Integer status;
+    private String status;
 
     /**
      * 应付金额
@@ -65,5 +65,10 @@ public class OrderLog implements Serializable {
      */
     private String updateBy;
 
+
+    /**
+     * 订单名称
+     */
+    private String title;
 
 }

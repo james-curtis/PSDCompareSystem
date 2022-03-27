@@ -3,8 +3,11 @@ package com.example.compare.controller;
 
 import com.example.compare.common.utils.QRCodeUtil;
 import com.example.compare.common.utils.Result;
+import com.example.compare.entity.OrderLog;
+import com.example.compare.service.OrderLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,6 +32,8 @@ import java.util.UUID;
 @RequestMapping("/order-log")
 @Api(value = "OrderLogController")
 public class OrderLogController {
+    @Autowired
+    OrderLogService service;
     /**
      * 获取跳转支付界面的二维码
      * @param url 跳转的url
@@ -42,5 +47,11 @@ public class OrderLogController {
         BufferedImage qr = QRCodeUtil.getBufferedImage(url, size);
         ImageIO.write(qr,"jpg",response.getOutputStream());
 //        return Result.success()
+    }
+
+    @GetMapping("/getOrderId")
+    public Result getOrderId(){
+        OrderLog orderLog = service.insertOrderLog();
+        return Result.success(orderLog.getOutTradeId());
     }
 }
