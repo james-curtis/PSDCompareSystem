@@ -1,9 +1,18 @@
 package com.example.compare.controller;
 
 
+import com.example.compare.common.utils.QRCodeUtil;
+import com.example.compare.common.utils.Result;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * <p>
@@ -16,5 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/order-log")
 public class OrderLogController {
-
+    @GetMapping("/getQRCode")
+    public void getQRCode(String url, Integer size, HttpServletResponse response) throws IOException {
+        BufferedImage qr = QRCodeUtil.getBufferedImage(url, size);
+        ImageIO.write(qr,"jpg",response.getOutputStream());
+//        return Result.success()
+    }
 }
