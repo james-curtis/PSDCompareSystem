@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@TableName(value = "compare_log")
+@TableName("compare_log")
 public class CompareLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
