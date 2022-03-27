@@ -14,5 +14,4 @@ import org.apache.ibatis.annotations.Mapper;
  */
 
 public interface CompareLogMapper extends BaseMapper<CompareLog> {
-
 }
