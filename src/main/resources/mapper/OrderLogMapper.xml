@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.compare.mapper.OrderLogMapper">
 
+    <resultMap id="orderLogAccount" type="com.example.compare.entity.OrderLog">
+        <id column="id" property="id"></id>
+        <result column="status" property="status"></result>
+        <result column="fee" property="fee"></result>
+        <result column="out_trade_id" property="outTradeId"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="update_time" property="updateTime"></result>
+        <result column="create_by" property="createBy"></result>
+        <result column="update_by" property="updateBy"></result>
+        <result column="title" property="title"></result>
+    </resultMap>
+
+    <select id="Search" resultMap="orderLogAccount">
+        select *from order_log where (id ='${param1}' or status='${param1}') and (create_time BETWEEN '${param2}' AND '${param3}') limit ${param4},${param5};
+    </select>
 </mapper>
