@@ -3,6 +3,8 @@ package com.example.compare.controller;
 
 import com.example.compare.common.utils.QRCodeUtil;
 import com.example.compare.common.utils.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,7 +26,16 @@ import java.io.IOException;
  */
 @RestController
 @RequestMapping("/order-log")
+@Api(value = "OrderLogController")
 public class OrderLogController {
+    /**
+     * 获取跳转支付界面的二维码
+     * @param url 跳转的url
+     * @param size 二维码大小
+     * @param response
+     * @throws IOException
+     */
+    @ApiOperation("刘锦堂===>获取跳转支付界面的二维码，url 跳转的url，size 二维码大小，")
     @GetMapping("/getQRCode")
     public void getQRCode(String url, Integer size, HttpServletResponse response) throws IOException {
         BufferedImage qr = QRCodeUtil.getBufferedImage(url, size);
