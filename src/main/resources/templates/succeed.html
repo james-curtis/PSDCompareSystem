@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>立即支付 - 简单商城</title>
+    <meta name="keywords" content="首页关键字"/>
+    <meta name="description" content="首页描述"/>
+
+    <link rel="stylesheet" media="screen" href="https://shop.demo.fastadmin.net/assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" media="screen" href="https://shop.demo.fastadmin.net/assets/addons/shop/css/common.css?v=1.0.2"/>
+
+</head>
+<body class="group-page">
+
+
+
+<style>
+    .panel-heading h2 {
+        font-size: 20px;
+        font-weight: normal;
+    }
+
+    .row-paytype div input {
+        display: none;
+    }
+
+    .row-paytype img {
+        height: 30px;
+        margin: 8px;
+        vertical-align: inherit;
+    }
+
+    .row-paytype > div {
+        margin-bottom: 10px;
+    }
+
+    .row-paytype > div > label {
+        width: 100%;
+        height: 50px;
+        display: block;
+        font-size: 14px;
+        line-height: 50px;
+        color: #999;
+        background: #fff;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        cursor: pointer;
+        text-align: center;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        font-weight: 400;
+    }
+
+    .row-paytype > div > label.active {
+        border-color: #0d95e8;
+        color: #0d95e8;
+    }
+
+    .row-paytype > div > label:hover {
+        z-index: 4;
+        border-color: #27b0d6;
+        color: #27b0d6;
+    }
+
+    .countdown i {
+        font-style: normal;
+    }
+</style>
+<div class="container" id="content-container">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <form id="payment-form" action="" method="post">
+                <input type="hidden" name="paytype" value="wechat"/>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>支付成功
+                        </h2>
+                    </div>
+                    <div class="panel-body">
+                        <p>订单编号：<span th:text="${out_trade_no}"></span></p>
+                        <p>订单金额：<span class="text-danger">￥<span th:text="${total_amount}"></span></span></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
