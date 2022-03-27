@@ -15,6 +15,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * <p>
@@ -35,7 +36,7 @@ public class OrderLogController {
      * @param response
      * @throws IOException
      */
-    @ApiOperation("刘锦堂===>获取跳转支付界面的二维码，url 跳转的url，size 二维码大小，")
+    @ApiOperation("刘锦堂===>获取跳转支付界面的二维码，url： 跳转的url，size： 二维码大小，")
     @GetMapping("/getQRCode")
     public void getQRCode(String url, Integer size, HttpServletResponse response) throws IOException {
         BufferedImage qr = QRCodeUtil.getBufferedImage(url, size);
