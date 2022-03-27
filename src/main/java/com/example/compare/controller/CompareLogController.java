@@ -32,7 +32,7 @@ public class CompareLogController {
     @Resource
     private CompareLogService compareLogService;
 
-    @ApiOperation(value = "分页操作   current:当前页码  size:一页显示条数")
+    @ApiOperation(value = "左呈祥===>对比记录分页查询操作   current:当前页码  size:一页最大显示条数")
     @GetMapping("/{current}/{size}")
     public Result page(@PathVariable("current") Long current, @PathVariable("size") Long size){
         try {
