@@ -6,6 +6,15 @@ spring:
     password: compare
   resources:
     static-locations: classpath:/static/
+  redis:
+    host: 114.55.0.204
+    port: 6379
+    password: nosugar
+    lettuce:
+      pool:
+        max-active: 20
+
+
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
