@@ -1,6 +1,9 @@
 package com.example.compare.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
+import com.example.compare.common.utils.AlipayUtil;
+import com.example.compare.common.utils.Result;
 import com.example.compare.entity.OrderLog;
 import com.example.compare.mapper.OrderLogMapper;
 import com.example.compare.service.OrderLogService;
@@ -27,6 +30,9 @@ public class OrderLogServiceImpl implements OrderLogService {
     @Autowired
     OrderLogMapper mapper;
 
+    @Autowired
+    AlipayUtil alipayUtil;
+
     @Override
     public OrderLog getOrderLog(String outTradeId) {
         OrderLog orderLog = mapper.selectOne(new QueryWrapper<OrderLog>().eq("out_trade_id",outTradeId));
@@ -43,21 +49,25 @@ public class OrderLogServiceImpl implements OrderLogService {
         mapper.insert(orderLog);
         return orderLog;
     }
+
     @Override
-    @ApiOperation(value = "显示所有记录信息")
     public List<OrderLog> select() {
         return mapper.selectList(null);
     }
 
     @Override
-    @ApiOperation(value = "根据id删除历史记录")
     public int deleteById(int id) {
         return mapper.deleteById(id);
     }
 
     @Override
-    @ApiOperation(value = "分页查询")
     public List<OrderLog> Search(String keywords, String startTime, String endTime, int index, int maxPage) {
         return mapper.Search(keywords, startTime, endTime, index, maxPage);
+    }
+
+    @Override
+    public String AlipayUtils(OrderLog orderLog) {
+        String form = alipayUtil.pay(orderLog);
+        return form;
     }
 }

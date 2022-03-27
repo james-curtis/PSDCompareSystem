@@ -1,6 +1,7 @@
 package com.example.compare.controller;
 
 
+
 import com.example.compare.common.utils.QRCodeUtil;
 import com.example.compare.common.utils.Result;
 import com.example.compare.entity.OrderLog;
@@ -8,16 +9,18 @@ import com.example.compare.service.OrderLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+import java.math.BigDecimal;
+
 
 /**
  * <p>
@@ -27,7 +30,7 @@ import java.util.UUID;
  * @author nosgua
  * @since 2022-03-26
  */
-@RestController
+@Controller
 @RequestMapping("/order-log")
 @Api(value = "OrderLogController")
 public class OrderLogController {
@@ -49,19 +52,20 @@ public class OrderLogController {
     }
 
     @GetMapping("/getOrderId")
+    @ApiOperation("/获取订单编号")
     public Result getOrderId(){
         OrderLog orderLog = service.insertOrderLog();
         return Result.success(orderLog.getOutTradeId());
     }
 
-    @ApiOperation(value = "郑前====》显示所有数据信息")
+    @ApiOperation(value = "郑前===>显示所有数据信息")
     @PostMapping("/OrderLogInformation")
     public Result orderLogAccount(){
         return Result.success(service.select());
     }
 
     @PostMapping("/search")
-    @ApiOperation(value = "郑前====》分页查询,keywords代表流水号或者支付状态,maxPage代表每页显示最大数量，" +
+    @ApiOperation(value = "郑前===>分页查询,keywords代表流水号或者支付状态,maxPage代表每页显示最大数量，" +
             "startPage代表开始页码,startTime和endTime代表要查询的时间段")
     public Result search(@RequestBody Map<String,String> map){
         //最大显示数量默认为10
@@ -84,9 +88,25 @@ public class OrderLogController {
     }
 
     @DeleteMapping("/delete")
-    @ApiOperation(value = "郑前====》根据id删除历史记录")
+    @ApiOperation(value = "郑前===>根据id删除历史记录")
     public Result delete(@RequestParam("id") int id){
         service.deleteById(id);
         return Result.success("成功");
     }
+
+
+
+    @ApiOperation("朱涵===>发起请求支付")
+    @GetMapping("/topay/{id}")
+    public String topay(@PathVariable String id, Model model) {
+        OrderLog orderLog = service.getOrderLog(id);
+        String form = service.AlipayUtils(orderLog);
+        model.addAttribute("form",form);
+        return "pay";
+    }
+
+
+
+
+
 }

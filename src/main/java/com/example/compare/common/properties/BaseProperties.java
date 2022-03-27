@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 /**
  * 系统配置类定义
  *
- * @author 朱涵
+ * @author
  * @date 2021/3/18
  */
 
