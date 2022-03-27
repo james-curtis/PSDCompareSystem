@@ -5,11 +5,13 @@ import com.example.compare.entity.OrderLog;
 import com.example.compare.mapper.OrderLogMapper;
 import com.example.compare.service.OrderLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -44,5 +46,22 @@ public class OrderLogServiceImpl implements OrderLogService {
         orderLog.setFee(new BigDecimal(100));
         mapper.insert(orderLog);
         return orderLog;
+    }
+    @Override
+    @ApiOperation(value = "显示所有记录信息")
+    public List<OrderLog> select() {
+        return mapper.selectList(null);
+    }
+
+    @Override
+    @ApiOperation(value = "根据id删除历史记录")
+    public int deleteById(int id) {
+        return mapper.deleteById(id);
+    }
+
+    @Override
+    @ApiOperation(value = "分页查询")
+    public List<OrderLog> Search(String keywords, String startTime, String endTime, int index, int maxPage) {
+        return mapper.Search(keywords, startTime, endTime, index, maxPage);
     }
 }
