@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author nosgua
  * @since 2022-03-26
  */
-public interface CompareLogService{
+public interface CompareLogService extends IService<CompareLog>{
 
 }
