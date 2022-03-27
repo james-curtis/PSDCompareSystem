@@ -49,25 +49,7 @@ public class Attachment implements Serializable {
      */
     private String path;
 
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
 
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
-    /**
-     * 创建者
-     */
-    private String createBy;
-
-    /**
-     * 更新者
-     */
-    private String updateBy;
 
 
 }
