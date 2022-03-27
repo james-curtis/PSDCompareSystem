@@ -4,7 +4,10 @@ import com.example.compare.entity.CompareLog;
 import com.example.compare.mapper.CompareLogMapper;
 import com.example.compare.service.CompareLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,4 +19,25 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, CompareLog> implements CompareLogService {
+    @Autowired
+    CompareLogMapper compareLogMapper;
+    @Override
+    public List<CompareLog> select() {
+        return compareLogMapper.selectList(null);
+    }
+
+    @Override
+    public int allDelete(int id) {
+        return compareLogMapper.allDelete(id);
+    }
+
+    @Override
+    public CompareLog selectById(int id) {
+        return compareLogMapper.selectById(id);
+    }
+
+    @Override
+    public List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage) {
+        return compareLogMapper.search(keywords, startTime, endTime, index, maxPage);
+    }
 }
