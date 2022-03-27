@@ -55,25 +55,7 @@ public class CompareLog implements Serializable {
      */
     private Integer compareFile2;
 
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
 
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
-
-    /**
-     * 创建者
-     */
-    private String createBy;
-
-    /**
-     * 更新者
-     */
-    private String updateBy;
 
 
 }
