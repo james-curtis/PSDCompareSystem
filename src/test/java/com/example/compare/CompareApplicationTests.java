@@ -5,19 +5,23 @@ import com.example.compare.service.OrderLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 class CompareApplicationTests {
 
     @Autowired
-    AttachmentMapper mapper;
+    StringRedisTemplate redisTemplate;
 
     @Autowired
     OrderLogService service;
     @Test
     void contextLoads() {
-//        System.out.println(service.insertOrderLog());
-        System.out.println(service.getOrderLog("31cac010-2860-44b8-aba1-3d91389b81ca"));
+        redisTemplate.opsForValue().set("123","123",100, TimeUnit.SECONDS);
+        System.out.println(redisTemplate.opsForValue().get("qq"));
     }
 
 }

@@ -43,7 +43,7 @@ public class OrderLogController {
      * @param response
      * @throws IOException
      */
-    @ApiOperation("刘锦堂===>获取跳转支付界面的二维码，url： 跳转的url，size： 二维码大小，")
+    @ApiOperation("刘锦堂===>获取跳转支付界面的二维码，url： 跳转的url，size： 二维码大小，默认值250")
     @GetMapping("/getQRCode")
     public void getQRCode(String url, Integer size, HttpServletResponse response) throws IOException {
         BufferedImage qr = QRCodeUtil.getBufferedImage(url, size);
