@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2022-03-26
  */
 @Service
-public class CompareLogServiceImpl implements CompareLogService {
+public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper,CompareLog> implements CompareLogService {
 
 }
