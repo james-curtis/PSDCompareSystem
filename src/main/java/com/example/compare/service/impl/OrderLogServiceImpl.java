@@ -37,12 +37,8 @@ public class OrderLogServiceImpl implements OrderLogService {
     public OrderLog insertOrderLog() {
         OrderLog orderLog = new OrderLog();
         orderLog.setOutTradeId(UUID.randomUUID().toString());
-        orderLog.setCreateBy("admin");
         orderLog.setStatus("unpaid");
-        orderLog.setCreateTime(LocalDateTime.now());
-        orderLog.setUpdateBy("admin");
         orderLog.setTitle("test");
-        orderLog.setUpdateTime(LocalDateTime.now());
         orderLog.setFee(new BigDecimal(100));
         mapper.insert(orderLog);
         return orderLog;
