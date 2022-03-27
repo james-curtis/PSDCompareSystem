@@ -10,7 +10,9 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -22,6 +24,8 @@ import lombok.experimental.Accessors;
  * @since 2022-03-26
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("compare_log")
 public class CompareLog implements Serializable {
@@ -49,8 +53,8 @@ public class CompareLog implements Serializable {
     /**
      * 关联order_log订单记录表的id
      */
-    @TableField("orderid")
-    private Integer orderid;
+    @TableField("order_id")
+    private Integer orderId;
 
     /**
      * 对比文件1的ID
@@ -69,22 +73,4 @@ public class CompareLog implements Serializable {
      */
     @TableField("create_time")
     private LocalDateTime createTime;
-
-    /**
-     * 更新时间
-     */
-    @TableField("update_time")
-    private LocalDateTime updateTime;
-
-    /**
-     * 创建者
-     */
-    @TableField("create_by")
-    private String createBy;
-
-    /**
-     * 更新者
-     */
-    @TableField("update_by")
-    private String updateBy;
 }

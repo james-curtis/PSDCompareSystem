@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.compare.mapper.CompareLogMapper">
+    <resultMap id="compareLogAccount" type="com.example.compare.entity.CompareLog">
+        <id column="id" property="id"></id>
+        <result column="serial_number" property="serialNumber"></result>
+        <result column="comparison_cost" property="comparisonCost"></result>
+        <result column="order_id" property="orderId"></result>
+        <result column="compare_file_1" property="compareFile1"></result>
+        <result column="compare_file_2" property="compareFile2"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
 
+    <select id="search" resultMap="compareLogAccount">
+        select *from order_log where serial_number ='${param1}'
+                                 and (create_time BETWEEN '${param2}' AND '${param3}') limit ${param4},${param5};
+    </select>
+
+    <delete id="allDelete">
+        delete order_log,compare_log,attachment from compare_log
+            left join order_log on compare_log.'order_id'= order_log.'out_trade_id'
+            left join attachment on compare_log.'id'= attachment.'id'
+            where compare_log.'orderId'='${arg0}' and compare_log.'id'='${arg1}';
+    </delete>
 </mapper>

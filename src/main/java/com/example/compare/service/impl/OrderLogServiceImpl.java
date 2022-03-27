@@ -51,21 +51,6 @@ public class OrderLogServiceImpl implements OrderLogService {
     }
 
     @Override
-    public List<OrderLog> select() {
-        return mapper.selectList(null);
-    }
-
-    @Override
-    public int deleteById(int id) {
-        return mapper.deleteById(id);
-    }
-
-    @Override
-    public List<OrderLog> Search(String keywords, String startTime, String endTime, int index, int maxPage) {
-        return mapper.Search(keywords, startTime, endTime, index, maxPage);
-    }
-
-    @Override
     public String AlipayUtils(OrderLog orderLog) {
         String form = alipayUtil.pay(orderLog);
         return form;

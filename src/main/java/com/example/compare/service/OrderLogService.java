@@ -33,31 +33,4 @@ public interface OrderLogService{
 
     String AlipayUtils(OrderLog orderLog);
 
-    /**
-     * 显示所有记录信息
-      * @return
-     */
-
-    List<OrderLog> select();
-
-
-    /**
-     *  根据id删除历史记录
-     * @param id
-     * @return
-     */
-
-    int deleteById(int id);
-
-    /**
-     * 分页查询
-     * @param keywords
-     * @param startTime
-     * @param endTime
-     * @param index
-     * @param accountPage
-     * @return
-     */
-
-    List<OrderLog> Search(String keywords,String startTime,String endTime,int index,int accountPage);
 }
