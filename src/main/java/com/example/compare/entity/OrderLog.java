@@ -9,6 +9,7 @@ import java.io.Serializable;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -23,6 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("order_log")
+@NoArgsConstructor
 public class OrderLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -74,6 +76,8 @@ public class OrderLog implements Serializable {
      * 更新者
      */
     private String updateBy;
+
+    private String title;
 
 
 }
