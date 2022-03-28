@@ -20,7 +20,7 @@
     <delete id="allDelete">
         delete order_log,compare_log,attachment from compare_log
           left join order_log on compare_log.order_id=order_log.id
-          left join attachment on compare_log.id=attachment.id
+          left join attachment on (compare_log.compare_file_1=attachment.id and compare_log.compare_file_2=attachment.id)
           where compare_log.order_id='${param1}';
     </delete>
 </mapper>
