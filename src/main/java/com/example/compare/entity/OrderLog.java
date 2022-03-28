@@ -2,15 +2,18 @@ package com.example.compare.entity;
 
 import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -21,6 +24,7 @@ import lombok.experimental.Accessors;
  * @since 2022-03-26
  */
 @Data
+@TableName("order_log")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
@@ -38,6 +42,7 @@ public class OrderLog implements Serializable {
     /**
      * 支付状态
      */
+
     private String status;
 
     /**
@@ -48,6 +53,7 @@ public class OrderLog implements Serializable {
     /**
      * 商户订单ID
      */
+    @TableField("out_trade_id")
     private String outTradeId;
 
     /**

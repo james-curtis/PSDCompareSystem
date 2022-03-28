@@ -33,4 +33,18 @@ public interface OrderLogService{
 
     String AlipayUtils(OrderLog orderLog);
 
+
+    /**
+     *      查询订单信息
+     */
+
+    public OrderLog getDiffInformation(String id);
+
+    /**
+     * 修改支付状态
+     */
+
+    public boolean updateStatus(OrderLog orderLog);
+
+
 }
