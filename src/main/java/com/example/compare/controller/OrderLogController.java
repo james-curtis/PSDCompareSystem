@@ -74,6 +74,7 @@ public class OrderLogController {
         OrderLog orderLog = service.getOrderLog(id);
         String form = service.AlipayUtils(orderLog);
         model.addAttribute("form",form);
+
         return "pay";
     }
 

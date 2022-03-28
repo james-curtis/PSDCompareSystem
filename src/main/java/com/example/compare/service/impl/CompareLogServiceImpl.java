@@ -26,18 +26,40 @@ public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, Compare
         return compareLogMapper.selectList(null);
     }
 
-    @Override
-    public int allDelete(int id) {
-        return compareLogMapper.allDelete(id);
-    }
+
 
     @Override
     public CompareLog selectById(int id) {
         return compareLogMapper.selectById(id);
     }
 
+
+
+    @Override
+    public Integer saveCompareLog(CompareLog compareLog) {
+        compareLogMapper.insert(compareLog);
+        Integer id = compareLog.getId();
+        return id;
+    }
+
     @Override
     public List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage) {
-        return compareLogMapper.search(keywords, startTime, endTime, index, maxPage);
+        return null;
+    }
+
+    @Override
+    public int allDelete(int orderId) {
+        return compareLogMapper.allDelete(orderId);
+    }
+
+    @Override
+    public CompareLog select(int id) {
+        return compareLogMapper.selectById(id);
+    }
+
+    @Override
+    public List<CompareLog> selectList() {
+        List<CompareLog> compareLogs = compareLogMapper.selectList(null);
+        return compareLogs;
     }
 }
