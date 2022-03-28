@@ -26,7 +26,6 @@ public class ThymeleafController {
         OrderLog orderLog = service.getOrderLog(outTradeId);
         model.addAttribute("total_amount",orderLog.getFee());
         model.addAttribute("out_trade_no",orderLog.getOutTradeId());
-
         return "index";
     }
 

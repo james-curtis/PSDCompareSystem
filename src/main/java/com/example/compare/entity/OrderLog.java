@@ -25,25 +25,27 @@ import lombok.experimental.Accessors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("order_log")
 public class OrderLog implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     /**
      * id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     /**
      * 支付状态
      */
-    @TableField("")
     private String status;
 
     /**
      * 应付金额
      */
-    @TableField("")
     private BigDecimal fee;
 
     public OrderLog(String status, BigDecimal fee, String outTradeId) {
@@ -55,19 +57,13 @@ public class OrderLog implements Serializable {
     /**
      * 商户订单ID
      */
-    @TableField("")
     private String outTradeId;
 
-    /**
-     * 创建时间
-     */
-    @TableField("")
-    private LocalDateTime createTime;
+
 
     /**
      * 更新时间
      */
-    @TableField("")
     private String title;
 
 }
