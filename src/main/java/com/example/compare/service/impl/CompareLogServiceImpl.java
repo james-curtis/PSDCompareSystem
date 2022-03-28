@@ -66,4 +66,8 @@ public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, Compare
         }
         return mapIPage;
     }
+
+    public String getOutTradeId(int id) {
+        return compareLogMapper.getOutTradeId(id);
+    }
 }

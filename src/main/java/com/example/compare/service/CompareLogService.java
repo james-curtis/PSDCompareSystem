@@ -17,7 +17,6 @@ import java.util.Map;
  * @since 2022-03-26
  */
 public interface CompareLogService extends IService<CompareLog> {
-
     /**
      * 保存CompareLog信息
      */
@@ -43,5 +42,20 @@ public interface CompareLogService extends IService<CompareLog> {
      */
     List<CompareLog> selectList();
 
-    IPage<Map<String,Object>> getCompareLogPageAndFilename(Long current,Long size);
+    /**
+     * 得到比较日志分页和文件名
+     *
+     * @param current 当前
+     * @param size    大小
+     * @return {@link IPage}<{@link Map}<{@link String}, {@link Object}>>
+     */
+    IPage<Map<String, Object>> getCompareLogPageAndFilename(Long current, Long size);
+
+    /**
+     * 根据对比记录表id 获取相应的订单编号
+     *
+     * @param id
+     * @return
+     */
+    String getOutTradeId(int id);
 }
