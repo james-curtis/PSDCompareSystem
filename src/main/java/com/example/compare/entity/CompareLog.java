@@ -73,4 +73,11 @@ public class CompareLog implements Serializable {
      */
     @TableField("create_time")
     private LocalDateTime createTime;
+
+
+    /**
+     * 对比状态
+     */
+    @TableField("status")
+    private String status;
 }
