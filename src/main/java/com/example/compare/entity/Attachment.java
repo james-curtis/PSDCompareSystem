@@ -40,6 +40,11 @@ public class Attachment implements Serializable {
     }
 
     /**
+     * 文件名
+     */
+    private String fileName;
+
+    /**
 
      * 图片大小，单位MB
      */
