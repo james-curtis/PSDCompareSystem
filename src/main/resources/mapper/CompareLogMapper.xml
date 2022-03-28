@@ -9,6 +9,7 @@
         <result column="compare_file_1" property="compareFile1"></result>
         <result column="compare_file_2" property="compareFile2"></result>
         <result column="create_time" property="createTime"></result>
+        <result column="status" property="status"></result>
     </resultMap>
 
     <select id="search" resultMap="compareLogAccount">
@@ -18,8 +19,8 @@
 
     <delete id="allDelete">
         delete order_log,compare_log,attachment from compare_log
-            left join order_log on compare_log.'order_id'= order_log.'out_trade_id'
-            left join attachment on compare_log.'id'= attachment.'id'
-            where compare_log.'orderId'='${arg0}' and compare_log.'id'='${arg1}';
+          left join order_log on compare_log.order_id=order_log.id
+          left join attachment on compare_log.id=attachment.id
+          where compare_log.order_id='${param1}';
     </delete>
 </mapper>

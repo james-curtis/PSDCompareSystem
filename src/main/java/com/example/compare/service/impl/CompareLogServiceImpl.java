@@ -21,14 +21,15 @@ import java.util.List;
 public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, CompareLog> implements CompareLogService {
     @Autowired
     CompareLogMapper compareLogMapper;
+
     @Override
     public List<CompareLog> select() {
         return compareLogMapper.selectList(null);
     }
 
     @Override
-    public int allDelete(int id) {
-        return compareLogMapper.allDelete(id);
+    public int allDelete(int orderId) {
+        return compareLogMapper.allDelete(orderId);
     }
 
     @Override
