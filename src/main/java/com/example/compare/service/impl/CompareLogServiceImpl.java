@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -18,27 +18,15 @@ import java.util.List;
  * @since 2022-03-26
  */
 @Service
-public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, CompareLog> implements CompareLogService {
-    @Autowired
-    CompareLogMapper compareLogMapper;
+public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper,CompareLog> implements CompareLogService {
+
+    @Resource
+    private CompareLogMapper compareLogMapper;
 
     @Override
-    public List<CompareLog> select() {
-        return compareLogMapper.selectList(null);
-    }
-
-    @Override
-    public int allDelete(int orderId) {
-        return compareLogMapper.allDelete(orderId);
-    }
-
-    @Override
-    public CompareLog selectById(int id) {
-        return compareLogMapper.selectById(id);
-    }
-
-    @Override
-    public List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage) {
-        return compareLogMapper.search(keywords, startTime, endTime, index, maxPage);
+    public Integer saveCompareLog(CompareLog compareLog) {
+        compareLogMapper.insert(compareLog);
+        Integer id = compareLog.getId();
+        return id;
     }
 }
