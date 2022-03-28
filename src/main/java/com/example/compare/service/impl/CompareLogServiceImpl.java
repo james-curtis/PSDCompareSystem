@@ -25,8 +25,6 @@ import java.util.Map;
 public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, CompareLog> implements CompareLogService {
     @Resource
     private CompareLogMapper compareLogMapper;
-    @Resource
-    private AttachmentMapper attachmentMapper;
 
     @Override
     public Integer saveCompareLog(CompareLog compareLog) {
@@ -52,19 +50,6 @@ public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, Compare
     @Override
     public List<CompareLog> selectList() {
         return compareLogMapper.selectList(null);
-    }
-
-    @Override
-    public IPage<Map<String, Object>> getCompareLogPageAndFilename(Long current, Long size) {
-        IPage<CompareLog> page = new Page<>(current, size);
-        IPage<Map<String, Object>> mapIPage = compareLogMapper.selectMapsPage(page, null);
-        for (Map<String, Object> record : mapIPage.getRecords()) {
-            String compare_file_1 = attachmentMapper.selectFileNameById((Integer) record.get("compare_file_1"));
-            String compare_file_2 = attachmentMapper.selectFileNameById((Integer) record.get("compare_file_2"));
-            record.put("compare_file_name_1", compare_file_1 == null ? "" : compare_file_1);
-            record.put("compare_file_name_2", compare_file_2 == null ? "" : compare_file_2);
-        }
-        return mapIPage;
     }
 
     public String getOutTradeId(int id) {
