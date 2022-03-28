@@ -36,7 +36,7 @@ public interface CompareLogService extends IService<CompareLog>{
     int allDelete(int orderId);
 
     /**
-     * 获取数据
+     * 根据id获取数据
      * @return
      */
     CompareLog select(int id);

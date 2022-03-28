@@ -85,7 +85,7 @@ public class CompareLog implements Serializable {
     private LocalDateTime createTime;
 
     /**
-     * 创建时间
+     * 状态
      */
     @TableField("status")
     private String status;
