@@ -33,6 +33,14 @@ public interface OrderLogService{
 
     String AlipayUtils(OrderLog orderLog);
 
+    /**
+     * 保存OrderLog信息
+     * @param orderLog
+     * @return
+     */
+    public Integer saveOrderLog(OrderLog orderLog);
+
+
 
     /**
      *      查询订单信息

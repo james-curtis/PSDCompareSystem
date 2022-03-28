@@ -17,7 +17,7 @@ import java.util.List;
 
 public interface CompareLogMapper extends BaseMapper<CompareLog> {
     /**
-     * 分页查询
+     * 历史记录分页查询
      * @return
      */
     List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage);
@@ -26,5 +26,5 @@ public interface CompareLogMapper extends BaseMapper<CompareLog> {
      * 多表删除
      * @return
      */
-    int allDelete(int id);
+    int allDelete(int orderId);
 }

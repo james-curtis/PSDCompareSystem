@@ -3,7 +3,6 @@ package com.example.compare.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.example.compare.common.utils.AlipayUtil;
 import com.example.compare.common.utils.Result;
@@ -90,5 +89,12 @@ public class OrderLogServiceImpl implements OrderLogService {
         }
 
         return false;
+    }
+
+    @Override
+    public Integer saveOrderLog(OrderLog orderLog) {
+        mapper.insert(orderLog);
+        Integer id = orderLog.getId();
+        return id;
     }
 }
