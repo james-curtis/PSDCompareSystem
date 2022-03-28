@@ -24,12 +24,12 @@ public interface CompareLogService extends IService<CompareLog> {
 
 
     /**
-     *  根据id删除历史记录
-     * @param id
+     *  根据orderId删除历史记录
+     * @param orderId
      * @return
      */
 
-    int allDelete(int id);
+    int allDelete(int orderId);
 
     /**
      *  根据id查询历史记录
@@ -40,7 +40,7 @@ public interface CompareLogService extends IService<CompareLog> {
     CompareLog selectById(int id);
 
     /**
-     * 分页查询
+     * 历史记录分页查询
      * @param keywords
      * @param startTime
      * @param endTime
