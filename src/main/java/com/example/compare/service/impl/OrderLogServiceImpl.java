@@ -35,7 +35,6 @@ public class OrderLogServiceImpl implements OrderLogService {
 
     @Override
     public OrderLog getOrderLog(String outTradeId) {
-
         OrderLog orderLog = mapper.selectOne(new QueryWrapper<OrderLog>().eq("out_trade_id",outTradeId));
         return orderLog;
     }
@@ -55,5 +54,12 @@ public class OrderLogServiceImpl implements OrderLogService {
     public String AlipayUtils(OrderLog orderLog) {
         String form = alipayUtil.pay(orderLog);
         return form;
+    }
+
+    @Override
+    public Integer saveOrderLog(OrderLog orderLog) {
+        mapper.insert(orderLog);
+        Integer id = orderLog.getId();
+        return id;
     }
 }

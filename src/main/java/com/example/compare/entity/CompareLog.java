@@ -1,17 +1,16 @@
 package com.example.compare.entity;
 
 import java.math.BigDecimal;
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -26,6 +25,7 @@ import lombok.experimental.Accessors;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("compare_log")
 public class CompareLog implements Serializable {
@@ -38,11 +38,21 @@ public class CompareLog implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    public CompareLog(String serialNumber, BigDecimal comparisonCost, Integer orderid, Integer compareFile1, Integer compareFile2, LocalDateTime createTime) {
+        this.serialNumber = serialNumber;
+        this.comparisonCost = comparisonCost;
+        this.orderid = orderid;
+        this.compareFile1 = compareFile1;
+        this.compareFile2 = compareFile2;
+        this.createTime = createTime;
+    }
+
     /**
      * 流水号
+
      */
     @TableField("serial_number")
-    private Integer serialNumber;
+    private String serialNumber;
 
     /**
      * 对比费用
@@ -54,7 +64,7 @@ public class CompareLog implements Serializable {
      * 关联order_log订单记录表的id
      */
     @TableField("order_id")
-    private Integer orderId;
+    private Integer orderid;
 
     /**
      * 对比文件1的ID
@@ -74,10 +84,10 @@ public class CompareLog implements Serializable {
     @TableField("create_time")
     private LocalDateTime createTime;
 
-
     /**
-     * 对比状态
+     * 状态
      */
     @TableField("status")
     private String status;
+
 }

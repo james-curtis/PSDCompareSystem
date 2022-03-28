@@ -23,13 +23,6 @@ public interface CompareLogService extends IService<CompareLog> {
     List<CompareLog> select();
 
 
-    /**
-     *  根据id删除历史记录
-     * @param id
-     * @return
-     */
-
-    int allDelete(int id);
 
     /**
      *  根据id查询历史记录
@@ -39,15 +32,36 @@ public interface CompareLogService extends IService<CompareLog> {
 
     CompareLog selectById(int id);
 
+
+
     /**
-     * 分页查询
-     * @param keywords
-     * @param startTime
-     * @param endTime
-     * @param index
-     * @param accountPage
+     * 保存CompareLog信息
+     * @param compareLog
      * @return
      */
+    public Integer saveCompareLog(CompareLog compareLog);
 
-    List<CompareLog> search( String keywords,String startTime,String endTime,int index,int accountPage);
+    /**
+     * 历史记录分页查询
+     * @return
+     */
+    List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage);
+
+    /**
+     * 多表删除
+     * @return
+     */
+    int allDelete(int orderId);
+
+    /**
+     * 根据id获取数据
+     * @return
+     */
+    CompareLog select(int id);
+
+    /**
+     * 获取所有数据
+     * @return
+     */
+    List<CompareLog> selectList();
 }
