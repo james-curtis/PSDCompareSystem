@@ -62,4 +62,12 @@ public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, Compare
         List<CompareLog> compareLogs = compareLogMapper.selectList(null);
         return compareLogs;
     }
+
+    @Override
+    public String getOutTradeId(int id) {
+//        compareLogMapper
+        return compareLogMapper.getOutTradeId(id);
+    }
+
+
 }

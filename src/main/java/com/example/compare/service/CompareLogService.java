@@ -64,4 +64,11 @@ public interface CompareLogService extends IService<CompareLog> {
      * @return
      */
     List<CompareLog> selectList();
+
+    /**
+     * 根据对比记录表id 获取相应的订单编号
+     * @param id
+     * @return
+     */
+    String getOutTradeId(int id);
 }

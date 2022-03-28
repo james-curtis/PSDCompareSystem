@@ -36,20 +36,7 @@ import java.math.BigDecimal;
 public class OrderLogController {
     @Autowired
     OrderLogService service;
-    /**
-     * 获取跳转支付界面的二维码
-     * @param url 跳转的url
-     * @param size 二维码大小
-     * @param response
-     * @throws IOException
-     */
-    @ApiOperation("刘锦堂===>获取跳转支付界面的二维码，url： 跳转的url，size： 二维码大小，默认值250")
-    @GetMapping("/getQRCode")
-    public void getQRCode(String url, Integer size, HttpServletResponse response) throws IOException {
-        BufferedImage qr = QRCodeUtil.getBufferedImage(url, size);
-        ImageIO.write(qr,"jpg",response.getOutputStream());
-//        return Result.success()
-    }
+
 
     @GetMapping("/getOrderId")
     @ApiOperation("/获取订单编号")
