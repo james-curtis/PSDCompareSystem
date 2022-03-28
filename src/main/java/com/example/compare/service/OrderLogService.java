@@ -19,7 +19,7 @@ public interface OrderLogService{
      * @param outTradeId
      * @return
      */
-    OrderLog getOrderLog( String outTradeId);
+    OrderLog getOrderLog(String outTradeId);
 
     /**
      * 插入新的订单
@@ -32,5 +32,13 @@ public interface OrderLogService{
      */
 
     String AlipayUtils(OrderLog orderLog);
+
+    /**
+     * 保存OrderLog信息
+     * @param orderLog
+     * @return
+     */
+    public Integer saveOrderLog(OrderLog orderLog);
+
 
 }

@@ -24,12 +24,27 @@ public class QiniuCloudUtil {
     // 密钥
     private static final Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 
+
+    private static final Integer expireSeconds = 3600;
 	//新建空间时，七牛云分配出的域名 （自己可在万网购买域名解析后，绑定到加速域名）
     private static final String DOMAIN = "http://r91jzctnn.hn-bkt.clouddn.com/";
 
     public static String getUpToken() {
-        return auth.uploadToken(bucketname, null, 3600, new StringMap().put("insertOnly", 1));
+        return auth.uploadToken(bucketname, null, expireSeconds, new StringMap().put("insertOnly", 1));
     }
+    public static String getBucket()
+    {
+        return bucketname;
+    }
+    public static Integer getExpireSeconds()
+    {
+        return expireSeconds;
+    }
+    public static Auth getAuth()
+    {
+        return auth;
+    }
+
 
 
     /**
