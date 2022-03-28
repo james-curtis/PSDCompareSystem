@@ -23,6 +23,7 @@ public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, Compare
     CompareLogMapper compareLogMapper;
     @Override
     public List<CompareLog> select() {
+
         return compareLogMapper.selectList(null);
     }
 

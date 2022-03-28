@@ -19,7 +19,7 @@ public interface OrderLogService{
      * @param outTradeId
      * @return
      */
-    OrderLog getOrderLog(String outTradeId);
+    OrderLog getOrderLog( String outTradeId);
 
     /**
      * 插入新的订单
