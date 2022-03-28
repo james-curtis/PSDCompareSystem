@@ -3,8 +3,6 @@ package com.example.compare.service;
 import com.example.compare.entity.OrderLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.List;
-
 /**
  * <p>
  * 支付订单表 服务类
@@ -13,24 +11,13 @@ import java.util.List;
  * @author nosgua
  * @since 2022-03-26
  */
-public interface OrderLogService{
+public interface OrderLogService extends IService<OrderLog>{
+
     /**
-     * 根据订单号获取订单
-     * @param outTradeId
+     * 保存OrderLog信息
+     * @param orderLog
      * @return
      */
-    OrderLog getOrderLog(String outTradeId);
-
-    /**
-     * 插入新的订单
-     * @return
-     */
-    OrderLog insertOrderLog();
-
-    /**
-     * 调用请求支付
-     */
-
-    String AlipayUtils(OrderLog orderLog);
+    public Integer saveOrderLog(OrderLog orderLog);
 
 }
