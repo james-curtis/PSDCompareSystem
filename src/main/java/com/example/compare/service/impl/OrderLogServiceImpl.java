@@ -1,6 +1,8 @@
 package com.example.compare.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.example.compare.common.utils.AlipayUtil;
 import com.example.compare.common.utils.Result;
@@ -54,6 +56,39 @@ public class OrderLogServiceImpl implements OrderLogService {
     public String AlipayUtils(OrderLog orderLog) {
         String form = alipayUtil.pay(orderLog);
         return form;
+    }
+
+
+
+
+    /**
+     * 查询订单数据
+     * @param id
+     * @return
+     */
+    @Override
+    public OrderLog getDiffInformation(String id) {
+        LambdaQueryWrapper<OrderLog> wrapper = new LambdaQueryWrapper<>();
+        /*QueryWrapper<OrderLog> w1=new QueryWrapper<>();*/
+          wrapper.eq(OrderLog::getOutTradeId,id);
+        OrderLog orderLog = mapper.selectOne(wrapper);
+        return orderLog;
+    }
+
+    @Override
+    public boolean updateStatus(OrderLog orderLog) {
+        /*UpdateWrapper<OrderLog> q1=new UpdateWrapper<>();
+        q1.eq("outTradeId",orderLog.getOutTradeId());*/
+        LambdaUpdateWrapper<OrderLog> wrapper = new LambdaUpdateWrapper<>();
+        /*QueryWrapper<OrderLog> w1=new QueryWrapper<>();*/
+        wrapper.eq(OrderLog::getOutTradeId,orderLog.getOutTradeId());
+        wrapper.set(OrderLog::getStatus,"complete");
+        int update = mapper.update(orderLog, wrapper);
+        if(update==1){
+            return true;
+        }
+
+        return false;
     }
 
     @Override

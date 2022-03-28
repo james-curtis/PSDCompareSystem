@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -21,10 +21,10 @@ import lombok.experimental.Accessors;
  * @since 2022-03-26
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("order_log")
-@NoArgsConstructor
 public class OrderLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,7 +53,6 @@ public class OrderLog implements Serializable {
 
     /**
      * 商户订单ID
-
      */
     private String outTradeId;
 
@@ -65,19 +64,6 @@ public class OrderLog implements Serializable {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
-
-    /**
-     * 创建者
-     */
-    private String createBy;
-
-    /**
-     * 更新者
-     */
-    private String updateBy;
-
     private String title;
-
 
 }
