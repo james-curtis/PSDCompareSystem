@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -19,6 +21,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@TableName("attachment")
 public class Attachment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,7 +32,15 @@ public class Attachment implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    public Attachment(Integer filesize, Integer resolutionX, Integer resolutionY, String path) {
+        this.filesize = filesize;
+        this.resolutionX = resolutionX;
+        this.resolutionY = resolutionY;
+        this.path = path;
+    }
+
     /**
+
      * 图片大小，单位MB
      */
     private Integer filesize;
