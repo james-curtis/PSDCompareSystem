@@ -60,13 +60,6 @@ public class OrderLogController {
 //        return Result.success()
     }
 
-    @GetMapping("/getOrderId")
-    @ApiOperation("/获取订单编号")
-    public Result getOrderId(){
-        OrderLog orderLog = service.insertOrderLog();
-        return Result.success(orderLog.getOutTradeId());
-    }
-
 
     @ApiOperation("朱涵===>发起请求支付")
     @GetMapping("/topay/{id}")
