@@ -15,24 +15,6 @@ import java.util.List;
  * @since 2022-03-26
  */
 public interface CompareLogService extends IService<CompareLog> {
-    /**
-     * 显示所有记录信息
-     * @return
-     */
-
-    List<CompareLog> select();
-
-
-
-    /**
-     *  根据id查询历史记录
-     * @param id
-     * @return
-     */
-
-    CompareLog selectById(int id);
-
-
 
     /**
      * 保存CompareLog信息
