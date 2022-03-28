@@ -17,10 +17,21 @@ public class Result {
     @ApiModelProperty("响应回的数据")
     private Object data;
 
+
+
+    @ApiModelProperty("响应回的保存成功的attachment对象的attachmentId")
+    private Integer attachmentId;
+
     protected Result(int code, String message, Object data) {
         this.code = code;
         this.message = message;
         this.data = data;
+    }
+    public Result(int code, String message, Object data, Integer attachmentId) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+        this.attachmentId = attachmentId;
     }
 
     /**
@@ -34,6 +45,17 @@ public class Result {
         return new Result(code,message,data);
     }
 
+    /**
+     *
+     * @param code 状态码
+     * @param message 返回的消息
+     * @param data 获取的数据
+     * @param attachmentId 保存成功的Attachment对象的ID
+     * @return
+     */
+    public static Result success(int code, String message, Object data, Integer attachmentId){
+        return new Result(code,message,data,attachmentId);
+    }
     /**
      *
      * @param data 获取的数据
