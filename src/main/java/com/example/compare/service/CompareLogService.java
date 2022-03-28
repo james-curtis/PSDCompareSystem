@@ -49,5 +49,5 @@ public interface CompareLogService extends IService<CompareLog> {
      * @return
      */
 
-    List<CompareLog> search(String keywords,String startTime,String endTime,int index,int accountPage);
+    List<CompareLog> search( String keywords,String startTime,String endTime,int index,int accountPage);
 }

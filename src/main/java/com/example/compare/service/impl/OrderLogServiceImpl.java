@@ -35,6 +35,7 @@ public class OrderLogServiceImpl implements OrderLogService {
 
     @Override
     public OrderLog getOrderLog(String outTradeId) {
+
         OrderLog orderLog = mapper.selectOne(new QueryWrapper<OrderLog>().eq("out_trade_id",outTradeId));
         return orderLog;
     }

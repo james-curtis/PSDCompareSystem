@@ -86,6 +86,7 @@ public class CompareLogController {
     public Result delete(@RequestParam("id") int id){
         Integer orderId = compareLogService.selectById(id).getOrderId();
         compareLogService.allDelete(orderId);
+
         return Result.success("成功");
     }
 }
