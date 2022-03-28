@@ -27,4 +27,6 @@ public interface CompareLogMapper extends BaseMapper<CompareLog> {
      * @return
      */
     int allDelete(int orderId);
+
+    String getOutTradeId(int id);
 }

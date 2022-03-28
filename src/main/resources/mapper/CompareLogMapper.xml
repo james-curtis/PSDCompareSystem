@@ -16,6 +16,12 @@
         select *from order_log where serial_number ='${param1}'
                                  and (create_time BETWEEN '${param2}' AND '${param3}') limit ${param4},${param5};
     </select>
+    <select id="getOutTradeId" resultType="java.lang.String">
+        select o.out_trade_id from compare_log c
+        left join order_log o
+        on o.id = c.order_id
+        where c.id = #{id}
+    </select>
 
     <delete id="allDelete">
         delete order_log,compare_log,attachment from compare_log
