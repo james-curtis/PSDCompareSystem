@@ -1,6 +1,6 @@
 package com.example.compare.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.compare.common.utils.QRCodeUtil;
 import com.example.compare.common.utils.Result;
 import com.example.compare.entity.CompareLog;
@@ -29,7 +29,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/compare-log")
 public class CompareLogController {
-
     @Resource
     private CompareLogServiceImpl compareLogService;
 
@@ -44,10 +43,9 @@ public class CompareLogController {
      */
     @ApiOperation(value = "左呈祥===>对比记录分页查询操作   current:当前页码  size:一页最大显示条数")
     @GetMapping("/{current}/{size}")
-    public Result page(@PathVariable("current") Long current, @PathVariable("size") Long size) {
+    public Result page(@PathVariable("current") Integer current, @PathVariable("size") Integer size) {
         try {
-            IPage<Map<String, Object>> page = compareLogService.getCompareLogPageAndFilename(current, size);
-            return Result.success(page);
+            return Result.success(compareLogService.page(new Page<>(current, size)));
         } catch (Exception e) {
             e.printStackTrace();
             return Result.fail(500, "服务器繁忙，请稍后再试", "");

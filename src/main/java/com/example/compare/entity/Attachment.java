@@ -6,26 +6,25 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * <p>
  * 附件表
- * </p>
  *
  * @author nosguar
  * @since 2022-03-26
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("attachment")
 public class Attachment implements Serializable {
-
     private static final long serialVersionUID = 1L;
-
     /**
      * 图片ID
      */
@@ -64,8 +63,4 @@ public class Attachment implements Serializable {
      * 图片路径
      */
     private String path;
-
-
-
-
 }

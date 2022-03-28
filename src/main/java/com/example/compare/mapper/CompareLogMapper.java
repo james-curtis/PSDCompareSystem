@@ -14,17 +14,20 @@ import java.util.List;
  * @author nosgua
  * @since 2022-03-26
  */
-
 public interface CompareLogMapper extends BaseMapper<CompareLog> {
     /**
      * 历史记录分页查询
+     *
      * @return
      */
     List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage);
 
     /**
      * 多表删除
+     *
      * @return
      */
     int allDelete(int orderId);
+
+    String getOutTradeId(int id);
 }
