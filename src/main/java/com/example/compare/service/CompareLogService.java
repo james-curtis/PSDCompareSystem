@@ -1,7 +1,10 @@
 package com.example.compare.service;
 
+import com.example.compare.controller.OrderLogController;
 import com.example.compare.entity.CompareLog;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,4 +23,27 @@ public interface CompareLogService extends IService<CompareLog>{
      */
     public Integer saveCompareLog(CompareLog compareLog);
 
+    /**
+     * 历史记录分页查询
+     * @return
+     */
+    List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage);
+
+    /**
+     * 多表删除
+     * @return
+     */
+    int allDelete(int orderId);
+
+    /**
+     * 获取数据
+     * @return
+     */
+    CompareLog select(int id);
+
+    /**
+     * 获取所有数据
+     * @return
+     */
+    List<CompareLog> selectList();
 }

@@ -1,6 +1,8 @@
 package com.example.compare.service.impl;
 
+import com.example.compare.controller.OrderLogController;
 import com.example.compare.entity.CompareLog;
+import com.example.compare.entity.OrderLog;
 import com.example.compare.mapper.CompareLogMapper;
 import com.example.compare.service.CompareLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -20,7 +23,7 @@ import javax.annotation.Resource;
 @Service
 public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper,CompareLog> implements CompareLogService {
 
-    @Resource
+    @Autowired
     private CompareLogMapper compareLogMapper;
 
     @Override
@@ -28,5 +31,26 @@ public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper,CompareL
         compareLogMapper.insert(compareLog);
         Integer id = compareLog.getId();
         return id;
+    }
+
+    @Override
+    public List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage) {
+        return null;
+    }
+
+    @Override
+    public int allDelete(int orderId) {
+        return compareLogMapper.allDelete(orderId);
+    }
+
+    @Override
+    public CompareLog select(int id) {
+        return compareLogMapper.selectById(id);
+    }
+
+    @Override
+    public List<CompareLog> selectList() {
+        List<CompareLog> compareLogs = compareLogMapper.selectList(null);
+        return compareLogs;
     }
 }
