@@ -57,7 +57,7 @@ public class CompareLogController {
     @ApiOperation(value = "郑前====》显示所有数据信息")
     @PostMapping("/compareLogInformation")
     public Result compareLogAccount(){
-        return Result.success(compareLogService.select());
+        return Result.success(compareLogService.selectList());
     }
 
     @PostMapping("/search")
@@ -86,7 +86,7 @@ public class CompareLogController {
     @DeleteMapping("/delete")
     @ApiOperation(value = "郑前====》根据id删除相关的历史记录")
     public Result delete(@RequestParam("id") int id){
-        Integer orderId = compareLogService.selectById(id).getOrderId();
+        Integer orderId = compareLogService.select(id).getOrderid();
         compareLogService.allDelete(orderId);
         return Result.success("成功");
     }
