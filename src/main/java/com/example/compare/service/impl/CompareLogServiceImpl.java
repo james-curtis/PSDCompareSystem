@@ -21,19 +21,6 @@ import java.util.List;
 public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, CompareLog> implements CompareLogService {
     @Autowired
     CompareLogMapper compareLogMapper;
-    @Override
-    public List<CompareLog> select() {
-        return compareLogMapper.selectList(null);
-    }
-
-
-
-    @Override
-    public CompareLog selectById(int id) {
-        return compareLogMapper.selectById(id);
-    }
-
-
 
     @Override
     public Integer saveCompareLog(CompareLog compareLog) {
@@ -44,7 +31,7 @@ public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, Compare
 
     @Override
     public List<CompareLog> search(String keywords, String startTime, String endTime, int index, int maxPage) {
-        return null;
+        return compareLogMapper.search(keywords,startTime,endTime,index,maxPage);
     }
 
     @Override
@@ -59,7 +46,6 @@ public class CompareLogServiceImpl extends ServiceImpl<CompareLogMapper, Compare
 
     @Override
     public List<CompareLog> selectList() {
-        List<CompareLog> compareLogs = compareLogMapper.selectList(null);
-        return compareLogs;
+        return compareLogMapper.selectList(null);
     }
 }

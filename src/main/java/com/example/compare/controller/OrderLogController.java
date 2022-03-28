@@ -126,9 +126,4 @@ public class OrderLogController {
             response.getWriter().print("fail");
         }
     }
-
-
-
-
-
 }
