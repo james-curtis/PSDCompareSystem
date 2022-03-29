@@ -61,7 +61,8 @@ public class AlipayUtil {
         //销售产品码
         bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
         //设置绝对超时时间:15分钟
-        bizContent.put("time_expire", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime() + 15*60*1000));
+        bizContent.put("timeout_express","15m");
+//        bizContent.put("time_expire", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date().getTime() + 15*60*1000));
 
         request.setBizContent(bizContent.toString());
 
