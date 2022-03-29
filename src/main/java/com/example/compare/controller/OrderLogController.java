@@ -116,6 +116,8 @@ public class OrderLogController {
 
 
                 if( service.updateOrderStatus(out_trade_no) && service2.updateCompareStatus(out_trade_no.getId())){
+                    //修改redis中的数据
+                    redisTemplate.opsForValue().set(service.getCompareIdByOrderId(out_trade_no.getOutTradeId()),"已支付",10,TimeUnit.MINUTES);
                     response.getWriter().print("success");
                 }else {
                     response.getWriter().print("fail");
