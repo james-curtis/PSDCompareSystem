@@ -14,4 +14,5 @@ import java.util.List;
  * @since 2022-03-26
  */
 public interface OrderLogMapper extends BaseMapper<OrderLog> {
+    String getCompareIdByOrderId(String id);
 }
