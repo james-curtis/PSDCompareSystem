@@ -41,11 +41,13 @@ public class OrderLog implements Serializable {
     /**
      * 支付状态
      */
+    @TableField("status")
     private String status;
 
     /**
      * 应付金额
      */
+    @TableField("fee")
     private BigDecimal fee;
 
     public OrderLog(String status, BigDecimal fee, String outTradeId) {
@@ -57,6 +59,7 @@ public class OrderLog implements Serializable {
     /**
      * 商户订单ID
      */
+    @TableField("out_trade_id")
     private String outTradeId;
 
 
@@ -64,6 +67,7 @@ public class OrderLog implements Serializable {
     /**
      * 更新时间
      */
+    @TableField("title")
     private String title;
 
 }

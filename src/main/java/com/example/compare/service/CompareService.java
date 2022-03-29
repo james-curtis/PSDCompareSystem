@@ -2,12 +2,21 @@ package com.example.compare.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.compare.entity.Compare;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+
 
 public interface CompareService extends IService<Compare> {
     String getOrderIdById(Integer id);
 
+
+    /**
+     * 保存compare对象进compare表
+     * @param compare
+     * @return
+     */
+    public Integer saveCompare(Compare compare);
     /**
      * 保存CompareLog信息
      *

@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,6 +23,14 @@ public class Compare {
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
+    public Compare(String workCode, Integer orderId, LocalDateTime createTime, String status, String serialNumber) {
+        this.workCode = workCode;
+        this.orderId = orderId;
+        this.status = status;
+        this.serialNumber = serialNumber;
+        this.createTime = createTime;
+    }
 
     /**
      * 工作码
@@ -52,4 +61,5 @@ public class Compare {
      */
     @TableField("create_time")
     private LocalDateTime createTime;
+
 }

@@ -21,6 +21,16 @@ public class CompareServiceImpl extends ServiceImpl<CompareMapper, Compare> impl
         return mapper.getOrderIdByid(id);
     }
 
+    @Resource
+    private CompareMapper compareMapper;
+
+    @Override
+    public Integer saveCompare(Compare compare) {
+        compareMapper.insert(compare);
+        Integer id = compare.getId();
+        return id;
+    }
+
     @Override
     public boolean updateCompareStatus(Integer id) {
         UpdateWrapper<Compare> q1=new UpdateWrapper<>();

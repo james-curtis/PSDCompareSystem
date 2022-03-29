@@ -29,7 +29,7 @@ import java.util.UUID;
  * @since 2022-03-26
  */
 @Service
-public class OrderLogServiceImpl implements OrderLogService {
+public class OrderLogServiceImpl extends ServiceImpl<OrderLogMapper,OrderLog> implements OrderLogService {
     @Autowired
     OrderLogMapper mapper;
 
@@ -91,6 +91,9 @@ public class OrderLogServiceImpl implements OrderLogService {
 
         return false;
     }
+
+
+
 
     @Override
     public Integer saveOrderLog(OrderLog orderLog) {
