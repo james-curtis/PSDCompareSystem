@@ -12,7 +12,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CompareServiceImpl implements CompareService {
+public class CompareServiceImpl extends ServiceImpl<CompareMapper,Compare> implements CompareService {
+
     @Autowired
     CompareMapper mapper;
     @Override
