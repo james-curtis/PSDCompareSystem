@@ -1,5 +1,6 @@
 package com.example.compare.common.utils;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -40,6 +41,24 @@ public class FileDownloadUtil {
         }
         bos.close();
         return bos.toByteArray();
+    }
+
+
+    /**
+     * 下载文件
+     * @param workcode
+     * @param response
+     * @throws IOException
+     */
+    public static void downloadZip(String workcode, HttpServletResponse response) throws IOException {
+
+        URL url = new URL(path+workcode);
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+
+        //得到输入流
+        InputStream inputStream = conn.getInputStream();
+        byte[] b= readInputStream(inputStream);
+        response.getOutputStream().write(b);
     }
 
 }

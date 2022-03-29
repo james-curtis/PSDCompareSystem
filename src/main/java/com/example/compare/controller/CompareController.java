@@ -1,5 +1,6 @@
 package com.example.compare.controller;
 
+import com.example.compare.common.utils.FileDownloadUtil;
 import com.example.compare.common.utils.QRCodeUtil;
 import com.example.compare.common.utils.Result;
 import com.example.compare.service.CompareService;
@@ -8,12 +9,17 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+@RestController
+@RequestMapping("/compare")
+@Api(value = "CompareController")
 public class CompareController {
     @Autowired
     CompareService service;
@@ -47,5 +53,17 @@ public class CompareController {
     public Result getStatus(Integer id){
         String status =redisTemplate.opsForValue().get(id);
         return Result.success(status);
+    }
+
+    /**
+     * 下载zip文件
+     * @param workcode
+     * @param response
+     * @throws IOException
+     */
+    @GetMapping("/download")
+    @ApiOperation("刘锦堂===>下载压缩包文件")
+    public void download(String workcode,HttpServletResponse response) throws IOException {
+        FileDownloadUtil.downloadZip(workcode,response);
     }
 }
