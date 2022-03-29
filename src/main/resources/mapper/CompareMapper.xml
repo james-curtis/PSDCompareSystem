@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.compare.mapper.CompareMapper">
+
+
+    <select id="getOrderIdByid" resultType="java.lang.String">
+        select o.out_trade_id from compare c
+        left join order_log o
+        on c.order_id = o.id
+        where c.id = #{id}
+    </select>
+</mapper>
