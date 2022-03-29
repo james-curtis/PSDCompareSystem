@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -111,8 +112,13 @@ public class CompareController {
      * @throws IOException
      */
     @GetMapping("/download")
-    @ApiOperation("刘锦堂===>下载压缩包文件")
-    public void download(String workcode,HttpServletResponse response) throws IOException {
+    @ApiOperation("刘锦堂===>下载压缩包文件，id：对比的id，workcode：workcode")
+    public void download(Integer id,String workcode,HttpServletResponse response) throws IOException {
+        String status = service.select(id).getStatus();
+        if(status.equals("未支付")){
+            response.getOutputStream().write("no pay".getBytes(StandardCharsets.UTF_8));
+            return ;
+        }
         FileDownloadUtil.downloadZip(workcode,response);
     }
 }
