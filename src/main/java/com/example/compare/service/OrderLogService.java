@@ -52,7 +52,8 @@ public interface OrderLogService{
      * 修改支付状态
      */
 
-    public boolean updateStatus(OrderLog orderLog);
+    public boolean updateOrderStatus(OrderLog orderLog);
+
 
 
 }
