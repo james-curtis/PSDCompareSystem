@@ -52,11 +52,10 @@ public class CompareController {
 
     @ApiOperation("李超====>工作码获取接口，通过该接口可以获取工作码用于调用图片上传对比接口，此接口不需要任何参数")
     @GetMapping("/getWorkCode")
-    public Result getWorkCode()
-    {
+    public Result getWorkCode() {
         try {
             BigDecimal b = new BigDecimal("100");
-            OrderLog orderLog = new OrderLog(null,"unpaid",b, UUID.randomUUID().toString(),"test");
+            OrderLog orderLog = new OrderLog(null, "unpaid", b, UUID.randomUUID().toString(), "test");
             Integer orderId = orderLogService.saveOrderLog(orderLog);
 
             Date currentTime = new Date();
@@ -65,21 +64,23 @@ public class CompareController {
             //生成两位随机数拼接在流水号后面
             Random random = new Random();
             int ends = random.nextInt(99);
-            String.format("%02d",ends);
+            String.format("%02d", ends);
             String serialNumber = dateString + ends;
             UUID workCode = UUID.randomUUID();
-            Compare compare = new Compare(workCode.toString(),orderId, LocalDateTime.now(),"未支付",serialNumber);
+            Compare compare = new Compare(workCode.toString(), orderId, LocalDateTime.now(), "未支付", serialNumber);
             Integer compareId = compareService.saveCompare(compare);
-            return Result.success(200,"获取成功",compare);
-        }catch (Exception e){
+            return Result.success(200, "获取成功", compare);
+        } catch (Exception e) {
             e.printStackTrace();
-            return Result.fail(400,"获取失败，请重试！",null);
+            return Result.fail(400, "获取失败，请重试！", null);
         }
     }
+
     /**
      * 获取跳转支付界面的二维码
-     * @param id 对比记录id
-     * @param size 二维码大小
+     *
+     * @param id       对比记录id
+     * @param size     二维码大小
      * @param response
      * @throws IOException
      */
@@ -87,38 +88,79 @@ public class CompareController {
     @GetMapping("/getQRCode")
     public void getQRCode(Integer id, Integer size, HttpServletResponse response) throws IOException {
         String outTradeId = service.getOrderIdById(id);
-        String url = "http://localhost:8081/"+"index?outTradeId="+outTradeId;
+        String url = "http://localhost:8081/" + "index?outTradeId=" + outTradeId;
         BufferedImage qr = QRCodeUtil.getBufferedImage(url, size);
-        ImageIO.write(qr,"jpg",response.getOutputStream());
+        ImageIO.write(qr, "jpg", response.getOutputStream());
 //        return Result.success()
     }
 
     /**
      * 轮训交易状态接口
+     *
      * @param id compare记录id
      * @return
      */
     @GetMapping("/getStatus")
     @ApiOperation("刘锦堂===>轮训支付状态，id：compare记录表id")
-    public Result getStatus(Integer id){
-        String status =redisTemplate.opsForValue().get(id);
+    public Result getStatus(Integer id) {
+        String status = redisTemplate.opsForValue().get(id);
         return Result.success(status);
     }
 
     /**
      * 下载zip文件
+     *
      * @param workcode
      * @param response
      * @throws IOException
      */
     @GetMapping("/download")
     @ApiOperation("刘锦堂===>下载压缩包文件，id：对比的id，workcode：workcode")
-    public void download(Integer id,String workcode,HttpServletResponse response) throws IOException {
+    public void download(Integer id, String workcode, HttpServletResponse response) throws IOException {
         String status = service.select(id).getStatus();
-        if(status.equals("未支付")){
+        if (status.equals("未支付")) {
             response.getOutputStream().write("no pay".getBytes(StandardCharsets.UTF_8));
-            return ;
+            return;
         }
-        FileDownloadUtil.downloadZip(workcode,response);
+        FileDownloadUtil.downloadZip(workcode, response);
+    }
+
+
+    @ApiOperation(value = "郑前====》显示所有数据信息")
+    @PostMapping("/compareInformation")
+    public Result compareLogAccount() {
+        return Result.success(service.allSelect());
+    }
+
+    @PostMapping("/search")
+    @ApiOperation(value = "郑前====》历史记录分页查询,keywords代表流水号,maxPage代表每页显示最大数量，" +
+            "startPage代表开始页码,startTime和endTime代表要查询的时间段")
+    public Result search(@RequestBody Map<String, String> map) {
+        //最大显示数量默认为10
+        int maxPage = 10;
+        //起始页码默认为1
+        int startPage = 1;
+        String mPage = map.get("maxPage");
+        String sPage = map.get("startPage");
+        String keywords = map.get("keyWords");
+        String startTime = map.get("startTime");
+        String endTime = map.get("endTime");
+        if (sPage != null) {
+            startPage = Integer.parseInt(sPage);
+        }
+        if (mPage != null) {
+            maxPage = Integer.parseInt(mPage);
+        }
+        List<Compare> search = service.search(keywords, startTime, endTime, ((startPage - 1) * maxPage), maxPage);
+        return Result.success(search);
+    }
+
+    @DeleteMapping("/delete")
+    @ApiOperation(value = "郑前====》根据serialNumber删除相关的历史记录")
+    public Result delete(@RequestParam("serialNumber") String serialNumber) {
+        Integer orderId = service.bySerialNumber(serialNumber).getOrderId();
+        service.allDelete(orderId);
+        return Result.success("成功");
+
     }
 }

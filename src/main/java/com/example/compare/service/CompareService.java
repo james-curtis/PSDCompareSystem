@@ -51,11 +51,18 @@ public interface CompareService extends IService<Compare> {
      *
      * @return
      */
-    List<Compare> selectList();
+    List<Compare> allSelect();
 
 
     /**
      *  修改对比状态
      */
     public boolean updateCompareStatus(Integer id);
+
+    /**
+     * 根据serialNumber获取数据
+     *
+     * @return
+     */
+    Compare bySerialNumber(String serialNumber);
 }
