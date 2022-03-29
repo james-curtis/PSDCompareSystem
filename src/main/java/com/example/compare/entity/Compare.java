@@ -1,11 +1,11 @@
 package com.example.compare.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("compare")
 public class Compare {
@@ -27,25 +26,30 @@ public class Compare {
     /**
      * 工作码
      */
+    @TableField("work_code")
     private String workCode;
 
     /**
      * 订单id
      */
+    @TableField("order_id")
     private Integer orderId;
 
     /**
      * 状态
      */
+    @TableField("status")
     private String status;
 
     /**
      * 流水号
      */
+    @TableField("serial_number")
     private String serialNumber;
 
     /**
      * 创建时间
      */
+    @TableField("create_time")
     private LocalDateTime createTime;
 }
