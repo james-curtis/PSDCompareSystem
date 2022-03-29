@@ -52,6 +52,5 @@ public interface OrderLogService{
     public boolean updateOrderStatus(OrderLog orderLog);
 
 
-
     String getCompareIdByOrderId(String id);
 }

@@ -111,6 +111,7 @@ public class OrderLogController {
                 return;
             }
 
+
             if(paramsMap.get("trade_status").equals("TRADE_SUCCESS") || paramsMap.get("trade_status").equals("TRADE_FINISHED")){
 
 

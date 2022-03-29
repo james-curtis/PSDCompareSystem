@@ -1,10 +1,11 @@
 package com.example.compare.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.compare.entity.Compare;
 import com.example.compare.mapper.CompareMapper;
 import com.example.compare.service.CompareService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
