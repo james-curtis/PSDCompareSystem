@@ -5,19 +5,15 @@
 <mapper namespace="com.example.compare.mapper.CompareMapper">
 
 
-    <resultMap id="compareAccount" type="com.example.compare.entity.Compare">
-        <id column="id" property="id"></id>
-        <result column="serial_number" property="serialNumber"></result>
-        <result column="order_id" property="orderId"></result>
-        <result column="create_time" property="createTime"></result>
-        <result column="status" property="status"></result>
-        <result column="work_code" property="workCode"></result>
+    <select id="bySerialNumber" resultType="com.example.compare.entity.Compare">
+        select *from compare where serial_number ='${param1}'
+    </select>
 
-    </resultMap>
-
-    <select id="search" resultMap="compareAccount">
-        select *from order_log where serial_number ='${param1}'
-                                 and (create_time BETWEEN '${param2}' AND '${param3}') limit ${param4},${param5};
+    <select id="search" resultType="com.example.compare.entity.Compare">
+        select compare.id,serial_number,order_id,create_time,fee,order_log.status from compare
+            left join order_log on compare.order_id=order_log.id
+        where serial_number ='${param1}'
+                                 and (create_time between '${param2}' and '${param3}') limit ${param4},${param5};
     </select>
 
     <delete id="allDelete">
@@ -25,6 +21,12 @@
           left join order_log on compare.order_id=order_log.id
           where compare.order_id='${param1}';
     </delete>
+
+
+    <select id="allSelect" resultType="com.example.compare.entity.Compare">
+        select compare.id,serial_number,order_id,create_time,order_log.status,fee from compare
+                left join order_log on compare.order_id=order_log.id;
+    </select>
 
     <select id="getOrderIdByid" resultType="java.lang.String">
         select o.out_trade_id from compare c
