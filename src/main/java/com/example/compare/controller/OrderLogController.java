@@ -13,6 +13,7 @@ import com.example.compare.service.OrderLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -41,6 +43,8 @@ import java.math.BigDecimal;
 @Api(value = "OrderLogController")
 public class OrderLogController {
 
+    @Autowired
+    StringRedisTemplate redisTemplate;
     @Autowired
    AlipayUtil alipayUtil;
     @Autowired
@@ -67,7 +71,8 @@ public class OrderLogController {
         OrderLog orderLog = service.getOrderLog(id);
         String form = service.AlipayUtils(orderLog);
         model.addAttribute("form",form);
-
+        //填入redis
+        redisTemplate.opsForValue().set(id,"未支付",15, TimeUnit.MINUTES);
         return "pay";
     }
 
@@ -107,6 +112,8 @@ public class OrderLogController {
 
 
                 if( service.updateStatus(out_trade_no)){
+                    //修改redis中的数据
+                    redisTemplate.opsForValue().set(service.getCompareIdByOrderId(out_trade_no.getOutTradeId()),"已支付",10,TimeUnit.MINUTES);
                     response.getWriter().print("success");
                 }else {
                     response.getWriter().print("fail");
