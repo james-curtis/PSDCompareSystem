@@ -62,4 +62,10 @@ public class Compare {
     @TableField("create_time")
     private LocalDateTime createTime;
 
+    /**
+     * 图片路径
+     */
+    @TableField("path")
+    private String path;
+
 }
