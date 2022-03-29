@@ -67,7 +67,12 @@ public class CompareServiceImpl extends ServiceImpl<CompareMapper,Compare> imple
     }
 
     @Override
-    public List<Compare> selectList() {
-        return mapper.selectList(null);
+    public List<Compare> allSelect() {
+        return mapper.allSelect();
+    }
+
+    @Override
+    public Compare bySerialNumber(String serialNumber) {
+        return mapper.bySerialNumber(serialNumber);
     }
 }

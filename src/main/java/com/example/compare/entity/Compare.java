@@ -62,4 +62,9 @@ public class Compare {
     @TableField("create_time")
     private LocalDateTime createTime;
 
+    /**
+     * 对比费用
+     */
+    private Integer fee;
+
 }
