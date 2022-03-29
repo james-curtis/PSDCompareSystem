@@ -4,4 +4,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.compare.entity.Compare;
 
 public interface CompareMapper extends BaseMapper<Compare> {
+    String getOrderIdByid(Integer id);
 }

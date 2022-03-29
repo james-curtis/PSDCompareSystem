@@ -1,5 +1,6 @@
 package com.example.compare;
 
+import com.example.compare.mapper.CompareMapper;
 import com.example.compare.service.OrderLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ class CompareApplicationTests {
 
     @Autowired
     OrderLogService service;
+
+    @Autowired
+    CompareMapper mapper;
     @Test
     void contextLoads() {
         redisTemplate.opsForValue().set("123","123",100, TimeUnit.SECONDS);
@@ -24,7 +28,7 @@ class CompareApplicationTests {
 
     @Test
     void ttt(){
-
+        System.out.println(mapper.getOrderIdByid(1));
     }
 
 }
