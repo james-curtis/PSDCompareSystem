@@ -101,7 +101,7 @@ public class CompareController {
      * @return
      */
     @GetMapping("/getStatus")
-    @ApiOperation("刘锦堂===>轮训支付状态，id：compare记录表id")
+    @ApiOperation("刘锦堂===>轮训支付状态，id：compare记录表id，返回空则超时，已支付则成功")
     public Result getStatus(Integer id) {
         String status = redisTemplate.opsForValue().get(id);
         return Result.success(status);
