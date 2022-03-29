@@ -1,31 +1,80 @@
 package com.example.compare.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.compare.common.utils.FileDownloadUtil;
 import com.example.compare.common.utils.QRCodeUtil;
 import com.example.compare.common.utils.Result;
+
+import com.example.compare.entity.Compare;
+import com.example.compare.entity.OrderLog;
 import com.example.compare.service.CompareService;
+import com.example.compare.service.OrderLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @RestController
 @RequestMapping("/compare")
 @Api(value = "CompareController")
 public class CompareController {
-    @Autowired
-    CompareService service;
+    @Resource
+    private CompareService service;
 
     @Autowired
-    StringRedisTemplate redisTemplate;
+    private StringRedisTemplate redisTemplate;
+
+    @Resource
+    private OrderLogService orderLogService;
+
+    @Resource
+    private CompareService compareService;
+
+    @ApiOperation("李超====>工作码获取接口，通过该接口可以获取工作码用于调用图片上传对比接口，此接口不需要任何参数")
+    @GetMapping("/getWorkCode")
+    public Result getWorkCode()
+    {
+        try {
+            BigDecimal b = new BigDecimal("100");
+            OrderLog orderLog = new OrderLog("unpaid",b, UUID.randomUUID().toString());
+            Integer orderId = orderLogService.saveOrderLog(orderLog);
+
+            Date currentTime = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+            String dateString = formatter.format(currentTime);
+            //生成两位随机数拼接在流水号后面
+            Random random = new Random();
+            int ends = random.nextInt(99);
+            String.format("%02d",ends);
+            String serialNumber = dateString + ends;
+            UUID workCode = UUID.randomUUID();
+            Compare compare = new Compare(workCode.toString(),orderId, LocalDateTime.now(),"未支付",serialNumber);
+            Integer compareId = compareService.saveCompare(compare);
+            return Result.success(200,"获取成功",compare);
+        }catch (Exception e){
+            e.printStackTrace();
+            return Result.fail(400,"获取失败，请重试！",null);
+        }
+    }
     /**
      * 获取跳转支付界面的二维码
      * @param id 对比记录id
