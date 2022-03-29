@@ -2,19 +2,19 @@ package com.example.compare.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.compare.entity.Compare;
-
 import com.example.compare.mapper.CompareMapper;
 import com.example.compare.service.CompareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.util.List;
 
-
-
 @Service
-public class CompareServiceImpl implements CompareService {
-    @Autowired
-    CompareMapper mapper;
+public class CompareServiceImpl extends ServiceImpl<CompareMapper, Compare> implements CompareService {
+    @Resource
+    private CompareMapper mapper;
+
     @Override
     public String getOrderIdById(Integer id) {
         return mapper.getOrderIdByid(id);
