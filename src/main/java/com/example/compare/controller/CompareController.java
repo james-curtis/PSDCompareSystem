@@ -56,7 +56,7 @@ public class CompareController {
     {
         try {
             BigDecimal b = new BigDecimal("100");
-            OrderLog orderLog = new OrderLog("unpaid",b, UUID.randomUUID().toString());
+            OrderLog orderLog = new OrderLog(null,"unpaid",b, UUID.randomUUID().toString(),"test");
             Integer orderId = orderLogService.saveOrderLog(orderLog);
 
             Date currentTime = new Date();

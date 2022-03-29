@@ -65,7 +65,7 @@ public class OrderLog implements Serializable {
 
 
     /**
-     * 更新时间
+     * title
      */
     @TableField("title")
     private String title;
