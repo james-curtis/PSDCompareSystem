@@ -13,4 +13,8 @@ public interface CompareMapper extends BaseMapper<Compare> {
     int allDelete(int orderId);
 
     List<Compare> search(String keywords, String startTime, String endTime, int index, int maxPage);
+
+    Compare bySerialNumber(String serialNumber);
+
+    List<Compare> allSelect();
 }

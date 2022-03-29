@@ -63,6 +63,11 @@ public class Compare {
     private LocalDateTime createTime;
 
     /**
+     * 对比费用
+     */
+    private Integer fee;
+
+    /**
      * 图片路径
      */
     @TableField("path")
