@@ -92,10 +92,6 @@ public class OrderLogServiceImpl implements OrderLogService {
         return false;
     }
 
-
-
-
-
     @Override
     public Integer saveOrderLog(OrderLog orderLog) {
         mapper.insert(orderLog);

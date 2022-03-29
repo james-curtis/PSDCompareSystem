@@ -48,6 +48,5 @@ public interface CompareService extends IService<Compare> {
     /**
      *  修改对比状态
      */
-
     public boolean updateCompareStatus(Integer id);
 }
