@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.example.compare.common.utils.AlipayUtil;
 import com.example.compare.common.utils.Result;
+import com.example.compare.entity.Compare;
 import com.example.compare.entity.OrderLog;
 import com.example.compare.mapper.OrderLogMapper;
 import com.example.compare.service.OrderLogService;
@@ -76,7 +77,7 @@ public class OrderLogServiceImpl implements OrderLogService {
     }
 
     @Override
-    public boolean updateStatus(OrderLog orderLog) {
+    public boolean updateOrderStatus(OrderLog orderLog) {
         /*UpdateWrapper<OrderLog> q1=new UpdateWrapper<>();
         q1.eq("outTradeId",orderLog.getOutTradeId());*/
         LambdaUpdateWrapper<OrderLog> wrapper = new LambdaUpdateWrapper<>();
@@ -90,6 +91,9 @@ public class OrderLogServiceImpl implements OrderLogService {
 
         return false;
     }
+
+
+
 
     @Override
     public Integer saveOrderLog(OrderLog orderLog) {
