@@ -8,11 +8,12 @@ import com.example.compare.entity.Compare;
 import com.example.compare.service.CompareService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,7 +31,7 @@ public class CompareController {
     @Resource
     private CompareService service;
 
-    @Resource
+    @Autowired
     private StringRedisTemplate redisTemplate;
 
     /**
@@ -81,7 +82,6 @@ public class CompareController {
         String status = redisTemplate.opsForValue().get(id);
         return Result.success(status);
     }
-
 
     @ApiOperation(value = "郑前====》显示所有数据信息")
     @PostMapping("/compareInformation")
