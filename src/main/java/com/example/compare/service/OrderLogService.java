@@ -1,6 +1,8 @@
 package com.example.compare.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.compare.entity.OrderLog;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -10,7 +12,8 @@ import com.example.compare.entity.OrderLog;
  * @author nosgua
  * @since 2022-03-26
  */
-public interface OrderLogService{
+
+public interface OrderLogService extends IService<OrderLog>{
     /**
      * 根据订单号获取订单
      * @param outTradeId
@@ -52,5 +55,5 @@ public interface OrderLogService{
     public boolean updateOrderStatus(OrderLog orderLog);
 
 
-    String getCompareIdByOrderId(String id);
+
 }
