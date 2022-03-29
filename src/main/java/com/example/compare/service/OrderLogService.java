@@ -1,9 +1,6 @@
 package com.example.compare.service;
 
 import com.example.compare.entity.OrderLog;
-import com.baomidou.mybatisplus.extension.service.IService;
-
-import java.util.List;
 
 /**
  * <p>
@@ -55,4 +52,5 @@ public interface OrderLogService{
     public boolean updateStatus(OrderLog orderLog);
 
 
+    String getCompareIdByOrderId(String id);
 }

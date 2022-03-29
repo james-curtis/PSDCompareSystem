@@ -27,7 +27,7 @@ public class Compare {
      * 工作码
      */
     @TableField("work_code")
-    private String workcode;
+    private String workCode;
 
     /**
      * 订单id

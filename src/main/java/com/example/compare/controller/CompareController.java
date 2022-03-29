@@ -3,24 +3,35 @@ package com.example.compare.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.compare.common.utils.QRCodeUtil;
 import com.example.compare.common.utils.Result;
+
+import com.example.compare.entity.Compare;
 import com.example.compare.service.CompareService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/compare")
+@Api(value = "CompareController")
 public class CompareController {
     @Resource
     private CompareService service;
+
+    @Resource
+    private StringRedisTemplate redisTemplate;
 
     /**
      * 获取跳转支付界面的二维码
@@ -56,5 +67,56 @@ public class CompareController {
             e.printStackTrace();
             return Result.fail(500, "服务器繁忙，请稍后再试", "");
         }
+    }
+
+    /**
+     * 轮训交易状态接口
+     *
+     * @param id compare记录id
+     * @return
+     */
+    @GetMapping("/getStatus")
+    @ApiOperation("刘锦堂===>轮训支付状态，id：compare记录表id")
+    public Result getStatus(Integer id) {
+        String status = redisTemplate.opsForValue().get(id);
+        return Result.success(status);
+    }
+
+
+    @ApiOperation(value = "郑前====》显示所有数据信息")
+    @PostMapping("/compareInformation")
+    public Result compareLogAccount() {
+        return Result.success(service.selectList());
+    }
+
+    @PostMapping("/search")
+    @ApiOperation(value = "郑前====》历史记录分页查询,keywords代表流水号,maxPage代表每页显示最大数量，" +
+            "startPage代表开始页码,startTime和endTime代表要查询的时间段")
+    public Result search(@RequestBody Map<String, String> map) {
+        //最大显示数量默认为10
+        int maxPage = 10;
+        //起始页码默认为1
+        int startPage = 1;
+        String mPage = map.get("maxPage");
+        String sPage = map.get("startPage");
+        String keywords = map.get("keyWords");
+        String startTime = map.get("startTime");
+        String endTime = map.get("endTime");
+        if (sPage != null) {
+            startPage = Integer.parseInt(sPage);
+        }
+        if (mPage != null) {
+            maxPage = Integer.parseInt(mPage);
+        }
+        List<Compare> search = service.search(keywords, startTime, endTime, ((startPage - 1) * maxPage), maxPage);
+        return Result.success(search);
+    }
+
+    @DeleteMapping("/delete")
+    @ApiOperation(value = "郑前====》根据id删除相关的历史记录")
+    public Result delete(@RequestParam("id") int id) {
+        Integer orderId = service.select(id).getOrderId();
+        service.allDelete(orderId);
+        return Result.success("成功");
     }
 }
