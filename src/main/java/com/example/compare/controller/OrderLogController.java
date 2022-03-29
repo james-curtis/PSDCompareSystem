@@ -7,8 +7,8 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.example.compare.common.utils.AlipayUtil;
 import com.example.compare.common.utils.ChangeToMapUtil;
 import com.example.compare.common.utils.QRCodeUtil;
-import com.example.compare.common.utils.Result;
 import com.example.compare.entity.OrderLog;
+import com.example.compare.service.CompareService;
 import com.example.compare.service.OrderLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,6 +49,9 @@ public class OrderLogController {
    AlipayUtil alipayUtil;
     @Autowired
     OrderLogService service;
+
+    @Autowired
+    CompareService service2;
     /**
      * 获取跳转支付界面的二维码
      * @param url 跳转的url
@@ -108,12 +111,11 @@ public class OrderLogController {
                 return;
             }
 
+
             if(paramsMap.get("trade_status").equals("TRADE_SUCCESS") || paramsMap.get("trade_status").equals("TRADE_FINISHED")){
 
 
-                if( service.updateStatus(out_trade_no)){
-                    //修改redis中的数据
-                    redisTemplate.opsForValue().set(service.getCompareIdByOrderId(out_trade_no.getOutTradeId()),"已支付",10,TimeUnit.MINUTES);
+                if( service.updateOrderStatus(out_trade_no) && service2.updateCompareStatus(out_trade_no.getId())){
                     response.getWriter().print("success");
                 }else {
                     response.getWriter().print("fail");

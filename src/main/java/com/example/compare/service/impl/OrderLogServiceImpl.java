@@ -3,14 +3,21 @@ package com.example.compare.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.example.compare.common.utils.AlipayUtil;
+import com.example.compare.common.utils.Result;
+import com.example.compare.entity.Compare;
 import com.example.compare.entity.OrderLog;
 import com.example.compare.mapper.OrderLogMapper;
 import com.example.compare.service.OrderLogService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -22,7 +29,7 @@ import java.util.UUID;
  * @since 2022-03-26
  */
 @Service
-public class OrderLogServiceImpl implements OrderLogService {
+public class OrderLogServiceImpl extends ServiceImpl<OrderLogMapper,OrderLog> implements OrderLogService {
     @Autowired
     OrderLogMapper mapper;
 
@@ -70,7 +77,7 @@ public class OrderLogServiceImpl implements OrderLogService {
     }
 
     @Override
-    public boolean updateStatus(OrderLog orderLog) {
+    public boolean updateOrderStatus(OrderLog orderLog) {
         /*UpdateWrapper<OrderLog> q1=new UpdateWrapper<>();
         q1.eq("outTradeId",orderLog.getOutTradeId());*/
         LambdaUpdateWrapper<OrderLog> wrapper = new LambdaUpdateWrapper<>();
@@ -85,10 +92,8 @@ public class OrderLogServiceImpl implements OrderLogService {
         return false;
     }
 
-    @Override
-    public String getCompareIdByOrderId(String id) {
-        return mapper.getCompareIdByOrderId(id);
-    }
+
+
 
     @Override
     public Integer saveOrderLog(OrderLog orderLog) {
