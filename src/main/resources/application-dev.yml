@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 2000MB
   datasource:
     url: jdbc:mysql://114.55.0.204:3306/compare
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -32,3 +36,5 @@ alipay:
   publicKey:  MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo/L55yaCMq8ForNNg7P2LoSiTwoQF5+fr8oxK9yqfdldUsoOytOqcM5m2M02xaSfqOzH2IMVp3EAKV4tTfH9g1aa/YQvMafYnV1e2CxyGfjqmPwu3S86x/1Bl/hIq1fbPz9HpKRDU6Yrj2M4Bue53Iq6tiLZm6aXc63qbjwUgcWacEWZOOKFo4uGJDzDmteS8MC30SSViEBZj2OeqMROm8x+VaReaOY7hPfuG1dactISEUrKgICJukfKwYn5M/M3QD53qNevbJKos4wLgrdfnTnZYw7G0pd2pTwnQHfAKs9Qr9R8IrkC/LmYFd0XGJnNguVyHoNWIAoj8Ue3jsj/IQIDAQAB
   notifyUrl: http://508n4r4325.qicp.vip/notify
   returnUrl: http://4wx878.natappfree.cc/succeed
+
+

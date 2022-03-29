@@ -24,7 +24,7 @@ public class GlobalHandler {
     @ExceptionHandler(value = IOException.class)
     public Result handler(IOException e){
         e.printStackTrace();
-        return Result.fail("获取二维码失败");
+        return Result.fail("IO出错");
     }
 
 }
