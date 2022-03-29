@@ -7,14 +7,13 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.example.compare.common.utils.AlipayUtil;
 import com.example.compare.common.utils.ChangeToMapUtil;
 import com.example.compare.common.utils.QRCodeUtil;
-import com.example.compare.common.utils.Result;
 import com.example.compare.entity.OrderLog;
 import com.example.compare.service.CompareService;
 import com.example.compare.service.OrderLogService;
-import com.example.compare.service.impl.CompareServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.math.BigDecimal;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -43,6 +43,8 @@ import java.math.BigDecimal;
 @Api(value = "OrderLogController")
 public class OrderLogController {
 
+    @Autowired
+    StringRedisTemplate redisTemplate;
     @Autowired
    AlipayUtil alipayUtil;
     @Autowired
@@ -72,7 +74,8 @@ public class OrderLogController {
         OrderLog orderLog = service.getOrderLog(id);
         String form = service.AlipayUtils(orderLog);
         model.addAttribute("form",form);
-
+        //填入redis
+        redisTemplate.opsForValue().set(id,"未支付",15, TimeUnit.MINUTES);
         return "pay";
     }
 
